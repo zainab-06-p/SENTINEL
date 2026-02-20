@@ -3,6 +3,14 @@
 
 ---
 
+## Starting from a GitHub ZIP download?
+
+Go to **https://github.com/zainab-06-p/SENTINEL** → click the green **Code** button → **Download ZIP** → extract it to `D:\Sentinel` (or anywhere you like).
+
+Then follow the steps below.
+
+---
+
 ## What You Need to Install First
 
 Before touching the project, install these three things in order.
@@ -76,11 +84,27 @@ cd D:\Sentinel
 
 ---
 
-### Step 3 — Install Python dependencies
+### Step 3 — Create a virtual environment
 
-Run this single command — it installs every Python package the project needs:
+A virtual environment keeps the project's packages separate from the rest of your laptop (prevents version conflicts).
+
 ```powershell
-pip install fastapi uvicorn "elasticsearch>=8.13.0,<9.0.0" pyod presidio-analyzer presidio-anonymizer spacy faker pydantic httpx pytest pytest-asyncio numpy pandas scikit-learn python-multipart
+cd D:\Sentinel
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+Your terminal prompt should now start with `(.venv)` — that means it worked.
+
+> **Every time you open a new terminal to work on this project**, run `.venv\Scripts\activate` first before anything else.
+
+---
+
+### Step 4 — Install Python dependencies
+
+With the venv active (`(.venv)` showing in your prompt), run:
+```powershell
+pip install -r acir_platform\requirements_task1.txt
 ```
 
 This will take **2–5 minutes** depending on your internet speed. You will see a lot of text scrolling — that is normal.
@@ -92,7 +116,7 @@ python -m spacy download en_core_web_lg
 
 ---
 
-### Step 4 — Start Elasticsearch (the database)
+### Step 5 — Start Elasticsearch (the database)
 
 Make sure Docker Desktop is open, then run:
 ```powershell
@@ -114,11 +138,13 @@ You should see `StatusCode : 200`.
 
 ---
 
-### Step 5 — Start the API server
+### Step 6 — Start the API server
+
+**Open a new PowerShell window** (keep Elasticsearch running), activate the venv, then:
 
 ```powershell
 cd D:\Sentinel\acir_platform
-python -m uvicorn task1_ingestion.api:app --host 0.0.0.0 --port 8001
+..\.venv\Scripts\uvicorn task1_ingestion.api:app --host 0.0.0.0 --port 8001
 ```
 
 You should see:
@@ -133,7 +159,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
 
 ---
 
-### Step 6 — Open the dashboard
+### Step 7 — Open the dashboard
 
 Open this file in your browser (Chrome or Edge recommended):
 ```
@@ -175,7 +201,7 @@ To run the full 84-test suite (with Elasticsearch running):
 
 ```powershell
 cd D:\Sentinel\acir_platform
-python -m pytest tests/test_task1.py -v
+..\.venv\Scripts\python.exe -m pytest tests/test_task1.py -v
 ```
 
 Expected result: `84 passed, 0 failed` in about 30 seconds.
@@ -188,7 +214,11 @@ When you come back after restarting your laptop:
 
 - [ ] Open **Docker Desktop** (wait for the whale icon to stop animating)
 - [ ] In PowerShell: `docker start es-acir`
-- [ ] Wait 30 seconds, then in PowerShell: `cd D:\Sentinel\acir_platform` → `python -m uvicorn task1_ingestion.api:app --host 0.0.0.0 --port 8001`
+- [ ] Wait 30 seconds, then open a new PowerShell:
+  ```powershell
+  cd D:\Sentinel\acir_platform
+  ..\.venv\Scripts\uvicorn task1_ingestion.api:app --host 0.0.0.0 --port 8001
+  ```
 - [ ] Open `D:\Sentinel\acir_platform\frontend\index.html` in browser
 
 ---
