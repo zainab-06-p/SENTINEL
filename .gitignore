@@ -1,0 +1,53 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Pytest cache
+.pytest_cache/
+.cache/
+*.pytest_cache
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# VS Code
+.vscode/
+
+# KYA agent private key (NEVER commit this)
+*.pem
+.acir_agent_key.pem
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Node (for Task 4 React frontend)
+node_modules/
+npm-debug.log*
+
+# Coverage
+.coverage
+htmlcov/
